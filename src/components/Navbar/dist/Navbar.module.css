@@ -17,6 +17,7 @@
   height: 68px;
   background: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
 }
 .navbar.scrolled .logoName {

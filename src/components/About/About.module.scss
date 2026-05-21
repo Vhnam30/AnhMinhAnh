@@ -1,5 +1,3 @@
-// About.module.scss
-
 .section {
   padding: var(--section-padding);
   background: var(--color-bg);
@@ -18,57 +16,43 @@
 
   @media (max-width: 900px) {
     grid-template-columns: 1fr;
-    gap: 36px;
+    gap: 40px;
   }
 }
 
-// ── Visual ────────────────────────────────────────────
+/* ==================== VISUAL - IMAGE ==================== */
 .visualCol {
   position: relative;
 }
 
 .visual {
-  background: linear-gradient(135deg, var(--color-green-light) 0%, #c8e6d0 100%);
   border-radius: var(--radius-lg);
-  height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
   box-shadow: var(--shadow-md);
+  aspect-ratio: 16 / 13;           // Tỉ lệ khung hình đẹp
+  background: linear-gradient(135deg, var(--color-green-light) 0%, #c8e6d0 100%);
 
   @media (max-width: 900px) {
-    height: 240px;
+    aspect-ratio: 16 / 10;
   }
 }
 
-.visualIcon {
-  font-size: 100px;
-  filter: drop-shadow(0 8px 20px rgba(0,0,0,0.1));
+.visualBg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;           // Rất quan trọng
+  object-position: center;
+  transition: transform 0.6s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 }
 
-.foundedBadge {
-  position: absolute;
-  bottom: -14px;
-  right: 24px;
-  background: var(--color-green);
-  color: #fff;
-  font-size: 13px;
-  font-weight: 600;
-  padding: 10px 18px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  box-shadow: var(--shadow-sm);
-}
-
-// ── Text Column ───────────────────────────────────────
+/* ==================== TEXT COLUMN ==================== */
 .textCol {
-  padding-left: 8px;
-
   @media (max-width: 900px) {
-    padding-left: 0;
+    text-align: center;
   }
 }
 
@@ -78,93 +62,91 @@
   color: var(--color-green);
   font-size: 11px;
   font-weight: 700;
-  padding: 4px 14px;
+  padding: 5px 16px;
   border-radius: 20px;
   margin-bottom: 12px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
 }
 
 .title {
   font-family: var(--font-display);
-  font-size: clamp(24px, 3.5vw, 38px);
+  font-size: clamp(26px, 4vw, 42px);
   font-weight: 700;
-  color: var(--color-text);
+  line-height: 1.2;
   margin-bottom: 12px;
-  line-height: 1.25;
 }
 
 .divider {
-  width: 60px;
+  width: 64px;
   height: 4px;
   background: var(--color-gold);
   border-radius: 2px;
-  margin-bottom: 20px;
-}
+  margin-bottom: 24px;
 
-.desc {
-  font-size: 15px;
-  color: var(--color-text-muted);
-  line-height: 1.8;
-  margin-bottom: 16px;
-
-  strong {
-    color: var(--color-green);
-    font-weight: 600;
+  @media (max-width: 900px) {
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
-// ── Values ────────────────────────────────────────────
+.desc {
+  font-size: 15.5px;
+  line-height: 1.85;
+  color: var(--color-text-muted);
+  margin-bottom: 20px;
+
+  strong {
+    color: var(--color-green);
+  }
+}
+
+/* Values & Stats */
 .values {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-bottom: 28px;
+  gap: 12px;
+  margin-bottom: 32px;
 }
 
 .valueItem {
   display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 14px;
-  color: var(--color-text);
-  font-weight: 500;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 15px;
 }
 
 .valueIcon {
-  font-size: 18px;
+  font-size: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 
-// ── Stats ─────────────────────────────────────────────
 .statsGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
 }
 
 .stat {
   background: var(--color-green-light);
   border-radius: var(--radius-sm);
-  padding: 16px;
+  padding: 18px 12px;
   text-align: center;
 }
 
 .statValue {
   display: block;
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 700;
   color: var(--color-green);
   line-height: 1;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
 }
 
 .statLabel {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--color-text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.4px;
-}
-
-.visualBg {
-  height: 466px;
+  letter-spacing: 0.5px;
 }
