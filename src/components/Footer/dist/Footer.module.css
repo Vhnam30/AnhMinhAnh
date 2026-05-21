@@ -1,0 +1,167 @@
+.footer {
+  background: var(--color-green-dark);
+  color: #e0e0e0;
+  padding-top: 70px;
+  font-size: 15px;
+}
+
+.inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 5%;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.4fr;
+  gap: 48px;
+}
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+}
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+
+.colTitle {
+  color: var(--color-gold);
+  margin-bottom: 18px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.linkList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.linkList a {
+  color: #e0e0e0;
+  text-decoration: none;
+  line-height: 2.1;
+  transition: all 0.25s ease;
+}
+.linkList a:hover {
+  color: var(--color-gold);
+  padding-left: 4px;
+}
+
+.logoGroup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.logo {
+  height: 68px;
+  width: auto;
+}
+
+.companyName {
+  color: #fff;
+  font-size: 19px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.tagline {
+  color: var(--color-gold);
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.description {
+  line-height: 1.7;
+  margin-bottom: 28px;
+  max-width: 280px;
+}
+
+.socialGroup {
+  margin-top: 10px;
+}
+
+.socialTitle {
+  color: #ccc;
+  font-size: 14px;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.socialIcons {
+  display: flex;
+  gap: 14px;
+}
+
+.socialIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  font-size: 22px;
+  color: #fff;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.socialIcon:hover {
+  background: var(--color-gold);
+  color: var(--color-green-dark);
+  transform: translateY(-4px) scale(1.08);
+}
+
+.contactInfo {
+  line-height: 1.8;
+}
+.contactInfo .hotline {
+  color: var(--color-gold);
+  font-weight: 700;
+  font-size: 17px;
+  text-decoration: none;
+}
+.contactInfo .hotline:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.bottomBar {
+  background: rgba(0, 0, 0, 0.35);
+  padding: 22px 0;
+  margin-top: 70px;
+  font-size: 13.5px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.copyright {
+  margin: 0;
+  color: #bbb;
+}
+
+.legal {
+  margin: 6px 0 0;
+  color: #aaa;
+}
+
+@media (max-width: 600px) {
+  .socialIcons {
+    gap: 12px;
+  }
+
+  .socialIcon {
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+  }
+}
+.emailContact {
+  text-decoration: none;
+}
