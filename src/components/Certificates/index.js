@@ -11,7 +11,7 @@ const CERTS = [
     icon: '📋',
     title: 'Giấy phép Bộ Y Tế',
     desc: 'Số đăng ký lưu hành thiết bị y tế theo Thông tư 46/2017/TT-BYT và các quy định hiện hành',
-    badge: 'TTBYT Loại C',
+    // badge: 'TTBYT Loại C',
   },
   {
     icon: '🌐',
@@ -56,7 +56,9 @@ function Certificates() {
               <div className={styles.cardIcon} aria-hidden="true">{cert.icon}</div>
               <h3 className={styles.cardTitle}>{cert.title}</h3>
               <p className={styles.cardDesc}>{cert.desc}</p>
-              <span className={styles.badge}>{cert.badge}</span>
+              <span className={cert.badge ? styles.badge : ''}>
+                {cert.badge}
+              </span>
             </article>
           ))}
         </div>

@@ -26,7 +26,7 @@ const PRODUCT = {
 
   certifications: ['Bộ Y Tế VN', 'CE', 'ISO 13485'],
   price: 'Liên hệ để nhận báo giá',
-  priceNote: 'Hỗ trợ trả góp • Hỗ trợ đấu thầu bệnh viện • Bảo hành chính hãng',
+  // priceNote: 'Hỗ trợ trả góp • Hỗ trợ đấu thầu bệnh viện • Bảo hành chính hãng',
   icon: '📟',
 };
 

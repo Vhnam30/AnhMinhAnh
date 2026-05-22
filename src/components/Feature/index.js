@@ -101,11 +101,11 @@ const FEATURES = [
     title: 'Hỗ trợ kỹ thuật 24/7',
     desc: 'Tại TP.HCM'
   },
-  {
-    icon: '🤝',
-    title: 'Hỗ trợ tư vấn & đấu thầu',
-    desc: 'Hỗ trợ các phòng khám và bệnh viện toàn quốc'
-  }
+  // {
+  //   icon: '🤝',
+  //   title: 'Hỗ trợ tư vấn & đấu thầu',
+  //   desc: 'Hỗ trợ các phòng khám và bệnh viện toàn quốc'
+  // }
 ];
 
 function Feature() {
