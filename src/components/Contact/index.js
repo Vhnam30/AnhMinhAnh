@@ -46,19 +46,18 @@ function Contact() {
   const [sendError, setSendError] = useState("");
 
   const handleChange = (e) => {
-    const { name, value, checked, type } = e.target;
-
-    if (name === "services") {
-      setForm((prev) => ({
-        ...prev,
-        services: checked
-          ? [...prev.services, value]
-          : prev.services.filter((item) => item !== value),
-      }));
-    } else {
-      setForm((prev) => ({ ...prev, [name]: value }));
-    }
-
+   const { name, value, checked } = e.target;     // ← Xóa 'type'
+  
+  if (name === "services") {
+    setForm((prev) => ({
+      ...prev,
+      services: checked
+        ? [...prev.services, value]
+        : prev.services.filter((item) => item !== value),
+    }));
+  } else {
+    setForm((prev) => ({ ...prev, [name]: value }));
+  }
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
