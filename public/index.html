@@ -37,15 +37,20 @@
     <!-- Language Alternative -->
     <link rel="alternate" hrefLang="vi" href="https://anhminhanhmedical.com" />
     
-    <!-- Icons -->
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+    <!-- ==================== ICONS / FAVICON ==================== -->
+    <link rel="icon" href="/logo.png" />
+    <link rel="shortcut icon" href="/logo.png" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+    
+    <!-- Các kích thước favicon khác (nên có) -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/logo.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/logo.png" />
     
     <!-- Manifest for PWA -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="manifest" href="/manifest.json" />
     
-    <!-- Preconnect to External Resources (if any) -->
+    <!-- Preconnect to External Resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
     
@@ -79,70 +84,10 @@
       ]
     }
     </script>
-    
-    <!-- Schema.org Structured Data - Product -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Product",
-      "name": "Máy CTG JUMPER JPD-300Pa",
-      "description": "Máy theo dõi tim thai và cơn co tử cung (CTG) cao cấp với đầu dò không dây hiện đại. Thiết kế tối ưu cho phòng khám, theo dõi FHR 50-210 nhịp/phút",
-      "brand": {
-        "@type": "Brand",
-        "name": "JUMPER - Angelsounds"
-      },
-      "offers": {
-        "@type": "Offer",
-        "url": "https://anhminhanhmedical.com#product",
-        "priceCurrency": "VND",
-        "availability": "https://schema.org/InStock"
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.8",
-        "reviewCount": "50"
-      }
-    }
-    </script>
-    
-    <!-- Schema.org Structured Data - LocalBusiness -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "Anh Minh Anh Medical",
-      "image": "https://anhminhanhmedical.com/logo.png",
-      "description": "Nhà cung cấp thiết bị y tế chuyên nghiệp cho bệnh viện và phòng khám",
-      "url": "https://anhminhanhmedical.com",
-      "telephone": "0369270210",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "[Your Address]",
-        "addressLocality": "[Your City]",
-        "addressRegion": "[Your Province]",
-        "postalCode": "[Your Postal Code]",
-        "addressCountry": "VN"
-      },
-      "priceRange": "VND"
-    }
-    </script>
-
-    <!-- Google Search Console Verification (thay YOUR_VERIFICATION_CODE) -->
-    <!-- <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" /> -->
 
   </head>
   <body>
     <noscript>Bạn cần bật JavaScript để chạy ứng dụng này.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
   </body>
 </html>
