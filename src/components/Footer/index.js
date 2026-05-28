@@ -67,9 +67,7 @@ function Footer() {
           <div className={styles.col}>
             <h4 className={styles.colTitle}>Sản phẩm</h4>
             <ul className={styles.linkList}>
-              {/* <li>
-                <a href="#product">Máy CTG Jumper JPD-300Pa</a>
-              </li> */}
+              
               <li>
                 <a href="#product">Máy siêu âm thai</a>
               </li>
@@ -129,10 +127,7 @@ function Footer() {
           <p className={styles.copyright}>
             © {currentYear} Thiết Bị Y Tế Anh Minh Anh. All Rights Reserved.
           </p>
-          <p className={styles.legal}>
-            Phân phối độc quyền Angelsounds - JUMPER | Giấy phép kinh doanh:{" "}
-            <span>xxxxxxxxxx</span>
-          </p>
+          
         </div>
       </div>
     </footer>
