@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './CtgLukComeL8d.module.scss';
-import { product } from '../../../assets/img';   // Thay bằng ảnh thật sau
+
 import { l8d } from '../../../assets/img/l8d';
 // Dữ liệu sản phẩm L8D
 const PRODUCT = {

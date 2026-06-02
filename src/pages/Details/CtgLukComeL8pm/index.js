@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './CtgLukComeL8pm.module.scss';
-import { product } from '../../../assets/img';   // Bạn có thể thay bằng ảnh thật sau
+
 import {l8pm} from "../../../assets/img/l8pm"
 // Dữ liệu sản phẩm - L8P-M (Luckcome)
 const PRODUCT = {
