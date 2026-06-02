@@ -1,124 +1,148 @@
-
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styles from './Product.module.scss';
-import { product } from '../../assets/img';
-// Dữ liệu sản phẩm
-const PRODUCT = {
-  id: 'jumper-jpd-300pa',
-  tag: 'Sản phẩm nổi bật',
-  name: 'MÁY CTG JUMPER JPD-300Pa',
-  brand: 'JUMPER - Angelsounds',
-  description:
-    'Máy theo dõi tim thai và cơn co tử cung (CTG) cao cấp với đầu dò không dây hiện đại. Thiết kế tối ưu cho phòng khám, mang lại sự thoải mái cho thai phụ và độ chính xác cao cho bác sĩ.',
-  
-  specs: [
-    'Theo dõi nhịp tim thai (FHR): 50 - 210 nhịp/phút (±2 bpm)',
-    'Tần số đầu dò: 1.0MHz ± 5%, công suất siêu âm < 5mW/cm²',
-    'Theo dõi cơn co tử cung (TOCO): 0 - 100 đơn vị (±10%)',
-    'Đầu dò không dây - Công nghệ Doppler xung đa tinh thể',
-    'Tự động bắt cử động thai (Auto Fetal Movement)',
-    'Giới hạn cảnh báo FHR cao: 160/170/180/190 bpm',
-    'Giới hạn cảnh báo FHR thấp: 90/100/110/120 bpm',
-    'Nguồn điện: AC 100V - 240V, 50/60Hz, công suất < 70W',
-    'Kích thước: 307 × 296 × 104 mm - Trọng lượng: 4Kg',
-    'Bảo hành chính hãng, phân phối độc quyền Angelsounds',
-  ],
+import { jumper300pa } from '../../assets/img/jumperJpd300pa/index.js';
+import { l8pm } from '../../assets/img/l8pm/index.js';
+import { l8d } from '../../assets/img/l8d/index.js';
+// Dữ liệu sản phẩm (bạn có thể tách ra file riêng sau)
+const PRODUCTS = [
+  {
+    id: 'jumper-jpd-300pa',
+    name: 'MÁY CTG JUMPER JPD-300Pa',
+    brand: 'JUMPER - Angelsounds',
+    description: 'Máy theo dõi tim thai và cơn co tử cung cao cấp với đầu dò không dây hiện đại.',
+    images: [
+       jumper300pa[0], // Thêm link ảnh thực tế vào đây
+       jumper300pa[1],
+       jumper300pa[2]
+    ],
+    badge: 'Nổi bật'
+  },
+  {
+    id: 'ctg-lukcome-l8pm',
+    name: 'MÁY THEO DÕI SẢN KHOA L8P-M',
+    brand: 'LUCKCOME',                    // Sửa brand cho đúng
+    description: 'Máy theo dõi sản khoa cao cấp với màn hình TFT 10.2 inch, hỗ trợ theo dõi đồng thời FHR, TOCO, FM và thai đôi. Tích hợp máy in nhiệt, pin Lithium và kết nối Wi-Fi/Ethernet.',
+    images: [l8pm[0], l8pm[1], l8pm[2]],
+    badge: 'Mới'
+},
 
-  certifications: ['Bộ Y Tế VN', 'CE', 'ISO 13485'],
-  price: 'Liên hệ để nhận báo giá',
-  // priceNote: 'Hỗ trợ trả góp • Hỗ trợ đấu thầu bệnh viện • Bảo hành chính hãng',
-  icon: '📟',
-};
+{
+    id: 'ctg-lukcome-l8d',
+    name: 'MÁY THEO DÕI SẢN KHOA L8D',
+    brand: 'LUCKCOME',
+    description: 'Máy theo dõi sản khoa L8D với màn hình TFT 7 inch, hỗ trợ theo dõi đồng thời FHR, TOCO, FM và thai đôi. Tích hợp máy in nhiệt, pin Lithium và kết nối Wi-Fi/Ethernet.',
+    images: [l8d[0], l8d[1], l8d[2]],   // Giả sử bạn dùng biến l8d
+    badge: 'Phổ biến'
+},
+  // Thêm nhiều sản phẩm khác vào đây
+];
 
-function Product() {
-  const [activeTab, setActiveTab] = useState('specs');
+function Product({ fullMode = false }) {
+  const [currentIndex, setCurrentIndex] = useState({});
 
-  const handleOrder = () => {
-    document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+  const handlePrev = (id) => {
+    setCurrentIndex(prev => ({
+      ...prev,
+      [id]: ((prev[id] || 0) - 1 + 3) % 3
+    }));
   };
+
+  const handleNext = (id) => {
+    setCurrentIndex(prev => ({
+      ...prev,
+      [id]: ((prev[id] || 0) + 1) % 3
+    }));
+  };
+
+  const displayedProducts = fullMode ? PRODUCTS : PRODUCTS.slice(0, 6);
 
   return (
     <section className={styles.section} id="product">
       <div className={styles.inner}>
-        <div className={styles.grid}>
+        <div className={styles.header}>
+          <h2 className={styles.title}>
+            {fullMode ? 'Tất Cả Sản Phẩm' : 'Sản Phẩm Nổi Bật'}
+          </h2>
+          {!fullMode && (
+            <Link to="/san-pham" className={styles.viewAll}>
+              Xem tất cả →
+            </Link>
+          )}
+        </div>
 
-          {/* Cột trái: Hình ảnh */}
-          <div className={styles.imageCol}>
-            <div className={styles.imageBox} role="img" aria-label="Máy CTG JUMPER JPD-300Pa">
-             
-              <img src={product} alt={PRODUCT.name} className={styles.productImage} />
-              <div className={styles.certBadge}>✅ Không dây</div>
-            </div>
+        <div className={styles.productGrid}>
+          {displayedProducts.map((product) => {
+            const index = currentIndex[product.id] || 0;
+            const currentImage = product.images[index] || '';
 
-            {/* <div className={styles.certRow}>
-              {PRODUCT.certifications.map((c) => (
-                <span key={c} className={styles.certChip}>{c}</span>
-              ))}
-            </div> */}
-          </div>
+            return (
+              <div key={product.id} className={styles.productCard}>
+                {/* Hình ảnh + Slide */}
+                <div className={styles.imageWrapper}>
+                  <div className={styles.imageBox}>
+                    {currentImage ? (
+                      <img
+                        src={currentImage}
+                        alt={product.name}
+                        className={styles.productImage}
+                      />
+                    ) : (
+                      <div className={styles.placeholder}>
+                        <span className={styles.placeholderIcon}>🖼️</span>
+                        <p>Đang cập nhật</p>
+                      </div>
+                    )}
+                  </div>
 
-          {/* Cột phải: Thông tin */}
-          <div className={styles.infoCol}>
-            <span className={styles.sectionTag}>{PRODUCT.tag}</span>
-            <div className={styles.brand}>{PRODUCT.brand}</div>
-            <h2 className={styles.productName}>{PRODUCT.name}</h2>
-            <p className={styles.description}>{PRODUCT.description}</p>
+                  {/* Nút chuyển slide */}
+                  {product.images.length > 1 && (
+                    <>
+                      <button 
+                        className={styles.sliderBtn} 
+                        onClick={() => handlePrev(product.id)}
+                      >
+                        ‹
+                      </button>
+                      <button 
+                        className={styles.sliderBtn} 
+                        onClick={() => handleNext(product.id)}
+                      >
+                        ›
+                      </button>
+                    </>
+                  )}
 
-            {/* Tabs */}
-            <div className={styles.tabRow} role="tablist">
-              {['specs', 'advantages'].map((tab) => (
-                <button
-                  key={tab}
-                  role="tab"
-                  aria-selected={activeTab === tab}
-                  className={`${styles.tab} ${activeTab === tab ? styles.tabActive : ''}`}
-                  onClick={() => setActiveTab(tab)}
-                >
-                  {tab === 'specs' ? '📋 Thông số kỹ thuật' : '🌟 Ưu điểm nổi bật'}
-                </button>
-              ))}
-            </div>
-
-            {/* Nội dung tab */}
-            <div role="tabpanel">
-              {activeTab === 'specs' ? (
-                <ul className={styles.specsList}>
-                  {PRODUCT.specs.map((spec, i) => (
-                    <li key={i} className={styles.specItem}>
-                      <span className={styles.checkIcon}>✓</span>
-                      {spec}
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <div className={styles.advantages}>
-                  <p><strong>Thiết kế không dây – Giải pháp tối ưu cho phòng khám hiện đại</strong></p>
-                  <ul className={styles.specsList}>
-                    <li className={styles.specItem}>• Loại bỏ hoàn toàn dây cáp vướng víu, tiết kiệm không gian</li>
-                    <li className={styles.specItem}>• Thai phụ có thể thay đổi tư thế, đi lại nhẹ nhàng trong lúc đo</li>
-                    <li className={styles.specItem}>• Độ nhạy cao, bắt chính xác cơn gò tử cung (TOCO)</li>
-                    <li className={styles.specItem}>• Tự động ghi nhận cử động thai nhi (Auto Fetal Movement)</li>
-                    <li className={styles.specItem}>• Phân phối độc quyền Angelsounds (Tập đoàn JUMPER) tại Việt Nam</li>
-                  </ul>
+                  {product.badge && (
+                    <div className={styles.badge}>{product.badge}</div>
+                  )}
                 </div>
-              )}
-            </div>
 
-            {/* Giá & CTA */}
-            <div className={styles.priceBlock}>
-              <div className={styles.price}>{PRODUCT.price}</div>
-              <div className={styles.priceNote}>{PRODUCT.priceNote}</div>
-            </div>
+                {/* Thông tin sản phẩm */}
+                <div className={styles.info}>
+                  <div className={styles.brand}>{product.brand}</div>
+                  <h3 className={styles.name}>{product.name}</h3>
+                  <p className={styles.description}>{product.description}</p>
 
-            <div className={styles.btnRow}>
-              <button className={styles.btnGreen} onClick={handleOrder}>
-                🛒 Đặt hàng ngay
-              </button>
-              <button className={styles.btnGold} onClick={handleOrder}>
-                📞 Tư vấn miễn phí
-              </button>
-            </div>
-          </div>
+                  {/* 2 nút */}
+                  <div className={styles.btnGroup}>
+                    <Link 
+                      to={`/san-pham/${product.id}`} 
+                      className={styles.btnDetail}
+                    >
+                      Chi tiết
+                    </Link>
+                    <Link 
+                      to="/lien-he" 
+                      className={styles.btnContact}
+                    >
+                      Liên hệ
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

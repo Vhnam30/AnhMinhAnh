@@ -1,48 +1,29 @@
 // ============================================================
 // Hero.js – Hero Section lớn đầu trang
-// - Background gradient xanh đậm với pattern trang trí
-// - Tiêu đề, slogan, 2 nút CTA
-// - Stats row phía dưới
-// - Visual card hiển thị sản phẩm nổi bật bên phải
 // ============================================================
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import styles from './Hero.module.scss';
 
 // Dữ liệu thống kê hiển thị trong hero
 const STATS = [
   { value: '50+', label: 'Thiết bị bàn giao' },
   { value: '10+', label: 'Bệnh viện tin dùng' },
-  // { value: '10+',  label: 'Năm kinh nghiệm' },
   { value: '24/7', label: 'Hỗ trợ kỹ thuật' },
 ];
 
 function Hero() {
-  // State cho animation fade-in khi mount
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    // Delay nhỏ để trigger CSS animation sau khi mount
     const timer = setTimeout(() => setVisible(true), 100);
     return () => clearTimeout(timer);
   }, []);
-
-  // Smooth scroll tới section product
-  const handleCTAProduct = (e) => {
-    e.preventDefault();
-    document.querySelector('#product')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const handleCTAContact = (e) => {
-    e.preventDefault();
-    document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
-  };
 
   return (
     <section className={styles.hero} id="hero" aria-label="Giới thiệu công ty">
       {/* Background dot pattern trang trí */}
       <div className={styles.bgPattern} aria-hidden="true" />
-
-      {/* Hình trang trí hình tròn góc */}
       <div className={styles.bgCircle1} aria-hidden="true" />
       <div className={styles.bgCircle2} aria-hidden="true" />
 
@@ -69,22 +50,14 @@ function Hero() {
             chuyên nghiệp và dịch vụ hậu mãi tận tâm.
           </p>
 
-          {/* Nút hành động */}
+          {/* Nút hành động - Đã sửa dùng React Router */}
           <div className={styles.ctaRow}>
-            <a
-              href="#product"
-              className={styles.btnPrimary}
-              onClick={handleCTAProduct}
-            >
+            <Link to="/san-pham" className={styles.btnPrimary}>
               🔬 Tìm hiểu sản phẩm
-            </a>
-            <a
-              href="#contact"
-              className={styles.btnOutline}
-              onClick={handleCTAContact}
-            >
+            </Link>
+            <Link to="/lien-he" className={styles.btnOutline}>
               Liên hệ ngay →
-            </a>
+            </Link>
           </div>
 
           {/* Thống kê nhanh */}
@@ -98,8 +71,7 @@ function Hero() {
           </div>
         </div>
 
-        {/* ── Cột phải: Visual card ── */}
-       
+        {/* Cột phải: Visual card (giữ nguyên nếu có) */}
       </div>
     </section>
   );

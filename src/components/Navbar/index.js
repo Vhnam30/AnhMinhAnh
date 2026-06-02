@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styles from './Navbar.module.scss';
 import { logo } from '../../assets/img';
 
 const NAV_ITEMS = [
-  { label: 'Trang chủ', href: '#hero' },
-  { label: 'Sản phẩm', href: '#product' },
-  {label: 'Dịch vụ', href: '#services' },
-  { label: 'Liên hệ', href: '#contact' },
-  { label: 'Về chúng tôi', href: '#about' },
+  { label: 'Trang chủ', to: '/' },
+  { label: 'Sản phẩm', to: '/san-pham' },
+  { label: 'Dịch vụ', to: '#services' },
+  { label: 'Liên hệ', to: '/lien-he' },
+  { label: 'Về chúng tôi', to: '#about' },
 ];
 
 const HOTLINES = [
@@ -18,6 +19,8 @@ const HOTLINES = [
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -25,32 +28,65 @@ function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = (e, href) => {
+  // Xử lý click cho các mục anchor (#services, #about)
+  const handleAnchorClick = (e, href) => {
     e.preventDefault();
-    const target = document.querySelector(href);
-    if (target) target.scrollIntoView({ behavior: 'smooth' });
     setMenuOpen(false);
+
+    const sectionId = href.replace('#', '');
+
+    // Nếu đang ở trang chủ thì chỉ scroll
+    if (location.pathname === '/') {
+      const target = document.getElementById(sectionId);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    } 
+    // Nếu đang ở trang khác thì chuyển về trang chủ rồi scroll
+    else {
+      navigate('/', { state: { scrollTo: sectionId } });
+    }
+  };
+
+  // Kiểm tra link active
+  const isActive = (item) => {
+    if (item.to.startsWith('#')) return false;
+    return location.pathname === item.to;
   };
 
   return (
     <>
       <nav className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''}`} data-navbar>
         {/* Logo */}
-        <a href="#hero" className={styles.logo} onClick={(e) => handleNavClick(e, '#hero')}>
+        <Link to="/" className={styles.logo}>
           <img src={logo} alt="Anh Minh Anh" className={styles.logoImage} />
           <div className={styles.logoText}>
             <span className={styles.logoName}>Anh Minh Anh</span>
             <span className={styles.logoTagline}>Thiết Bị Y Tế</span>
           </div>
-        </a>
+        </Link>
 
         {/* Menu Desktop */}
         <ul className={styles.menu}>
           {NAV_ITEMS.map((item) => (
-            <li key={item.href}>
-              <a href={item.href} onClick={(e) => handleNavClick(e, item.href)}>
-                {item.label}
-              </a>
+            <li key={item.to}>
+              {item.to.startsWith('#') ? (
+                <a
+                  href={item.to}
+                  onClick={(e) => handleAnchorClick(e, item.to)}
+                  className={styles.navLink}
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <Link
+                  to={item.to}
+                  className={`${styles.navLink} ${isActive(item) ? styles.active : ''}`}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              )}
             </li>
           ))}
         </ul>
@@ -85,14 +121,25 @@ function Navbar() {
       {menuOpen && (
         <div className={styles.mobileMenu}>
           {NAV_ITEMS.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              onClick={(e) => handleNavClick(e, item.href)}
-              className={styles.mobileLink}
-            >
-              {item.label}
-            </a>
+            <React.Fragment key={item.to}>
+              {item.to.startsWith('#') ? (
+                <a
+                  href={item.to}
+                  onClick={(e) => handleAnchorClick(e, item.to)}
+                  className={styles.mobileLink}
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <Link
+                  to={item.to}
+                  className={`${styles.mobileLink} ${isActive(item) ? styles.active : ''}`}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              )}
+            </React.Fragment>
           ))}
 
           <div className={styles.mobileHotlineTitle}>Hotline liên hệ</div>

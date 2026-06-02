@@ -1,24 +1,30 @@
 import "./App.css";
+import { Routes, Route } from "react-router-dom";
+
 import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import Product from "./components/Product";
-import Services from "./components/Services";
-import Features from "./components/Feature";
-import Certificates from "./components/Certificates";
-import About from "./components/About";
-import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+
+// Pages
+import Home from "./pages/Home";
+import Product from "./components/Product/index.js";
+import Contact from "./components/Contact/index.js"; // Đổi tên để dễ phân biệt
+import Jpd300pa from "./pages/Details/Jpd300pa";
+import CtgLukComeL8pm from "./pages/Details/CtgLukComeL8pm";
+import CtgLukComeL8d from "./pages/Details/CtgLuckComeL8d/index.js";
 function App() {
   return (
     <div className="App">
       <Navbar />
-      <Hero />
-      <Product />
-      <Services />
-      <Features />
-      <Certificates />
-      <About />
-      <Contact />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/san-pham" element={<Product />} />
+        <Route path="/lien-he" element={<Contact />} />
+        <Route path="/san-pham/jumper-jpd-300pa" element={<Jpd300pa />} />
+        <Route path="/san-pham/ctg-lukcome-l8pm" element={<CtgLukComeL8pm />} />
+        <Route path="/san-pham/ctg-lukcome-l8d" element={<CtgLukComeL8d />} />
+      </Routes>
+
       <Footer />
     </div>
   );
