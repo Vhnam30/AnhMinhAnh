@@ -1,55 +1,73 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import styles from './CtgLukComeL8pm.module.scss';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styles from "./CtgLukComeL8pm.module.scss";
 
-import {l8pm} from "../../../assets/img/l8pm"
+import { l8pm } from "../../../assets/img/l8pm";
 // Dữ liệu sản phẩm - L8P-M (Luckcome)
 const PRODUCT = {
-  id: 'ctg-l8p-m',
-  tag: 'Sản phẩm cao cấp',
-  name: 'MÁY THEO DÕI SẢN KHOA L8P-M',
-  brand: 'LUCKCOME',
+  id: "ctg-l8p-m",
+  tag: "Sản phẩm cao cấp",
+  name: (
+    <>
+      MÁY CTG <span className={styles.highlight}>KHÔNG DÂY</span> LUCKCOME L8P-M
+    </>
+  ),
+  brand: "LUCKCOME",
   description:
-    'Máy theo dõi sản khoa cao cấp L8P-M với màn hình TFT 10.2 inch, hỗ trợ theo dõi đồng thời FHR, TOCO, FM và thai đôi. Thiết kế hiện đại, tích hợp pin Lithium, máy in nhiệt và kết nối mạng.',
-  
+    "Máy theo dõi sản khoa cao cấp L8P-M với màn hình TFT 10.2 inch, hỗ trợ theo dõi đồng thời FHR, TOCO, FM và thai đôi. Thiết kế hiện đại, tích hợp pin Lithium, máy in nhiệt và kết nối mạng.",
+
   specs: [
-    'Màn hình TFT 10.2 inch, độ phân giải 800x480',
-    'Theo dõi nhịp tim thai (FHR): 50~210 bpm (Doppler xung)',
-    'Theo dõi cơn co tử cung (TOCO): 0~100 đơn vị',
-    'Theo dõi cử động thai (FM): Thủ công & Tự động',
-    'Hỗ trợ theo dõi thai đôi (FHR2)',
-    'Tích hợp máy in nhiệt in biểu đồ thời gian thực',
-    'Pin Lithium 14.8V 2200mAh, hoạt động 5 giờ',
-    'Kết nối Wi-Fi / Ethernet với Central Station',
-    'Kích thước: 295 × 240 × 73 mm - Trọng lượng: 1.75kg',
-    'Nguồn điện: AC 100-240V, 50/60Hz',
+    <>
+      Màn hình<span className={styles.highlight}>cảm ứng</span>10.2 inch, độ
+      phân giải 800x480
+    </>,
+    <>
+      <span className={styles.highlight}>
+        Chức năng điện toán phân tích chỉ số STV (Short-Term Variation - Dao
+        động ngắn hạn) là một trong những công cụ lâm sàng tiên tiến và có giá
+        trị nhát trong đo biểu đồ tim thai và cơn gò tử cung (CTG).
+      </span>
+    </>,
+
+    "Theo dõi nhịp tim thai (FHR): 50~210 bpm (Doppler xung)",
+    "Theo dõi cơn co tử cung (TOCO): 0~100 đơn vị",
+    "Theo dõi cử động thai (FM): Thủ công & Tự động",
+    "Hỗ trợ theo dõi thai đôi (FHR2)",
+    "Tích hợp máy in nhiệt in biểu đồ thời gian thực",
+    "Pin Lithium 14.8V 2200mAh, hoạt động 5 giờ",
+    "Kết nối Wi-Fi / Ethernet với Central Station",
+    "Kích thước: 295 × 240 × 73 mm - Trọng lượng: 1.75kg",
+    "Nguồn điện: AC 100-240V, 50/60Hz",
   ],
 
-  certifications: ['CE', 'ISO 13485', 'Bộ Y Tế VN'],
-  price: 'Liên hệ để nhận báo giá',
-  icon: '📟',
+  certifications: ["CE", "ISO 13485", "Bộ Y Tế VN"],
+  price: "Liên hệ để nhận báo giá",
+  icon: "📟",
 };
 
 function CtgLukComeL8pm() {
-  const [activeTab, setActiveTab] = useState('specs');
+  const [activeTab, setActiveTab] = useState("specs");
   const navigate = useNavigate();
 
   const goToContact = () => {
-    navigate('/lien-he');
+    navigate("/lien-he");
   };
 
   return (
     <section className={styles.section} id="product">
       <div className={styles.inner}>
         <div className={styles.grid}>
-
           {/* Cột trái: Hình ảnh */}
           <div className={styles.imageCol}>
-            <div className={styles.imageBox} role="img" aria-label="Máy theo dõi sản khoa L8P-M">
-              <img 
-                src={l8pm[0]} 
-                alt={PRODUCT.name} 
-                className={styles.productImage} 
+            <div
+              className={styles.imageBox}
+              role="img"
+              aria-label="Máy theo dõi sản khoa L8P-M"
+            >
+              <img
+                src={l8pm[0]}
+                alt={PRODUCT.name}
+                className={styles.productImage}
               />
               <div className={styles.certBadge}>✅ Màn hình lớn 10.2"</div>
             </div>
@@ -64,22 +82,24 @@ function CtgLukComeL8pm() {
 
             {/* Tabs */}
             <div className={styles.tabRow} role="tablist">
-              {['specs', 'advantages'].map((tab) => (
+              {["specs", "advantages"].map((tab) => (
                 <button
                   key={tab}
                   role="tab"
                   aria-selected={activeTab === tab}
-                  className={`${styles.tab} ${activeTab === tab ? styles.tabActive : ''}`}
+                  className={`${styles.tab} ${activeTab === tab ? styles.tabActive : ""}`}
                   onClick={() => setActiveTab(tab)}
                 >
-                  {tab === 'specs' ? '📋 Thông số kỹ thuật' : '🌟 Ưu điểm nổi bật'}
+                  {tab === "specs"
+                    ? "📋 Thông số kỹ thuật"
+                    : "🌟 Ưu điểm nổi bật"}
                 </button>
               ))}
             </div>
 
             {/* Nội dung tab */}
             <div role="tabpanel">
-              {activeTab === 'specs' ? (
+              {activeTab === "specs" ? (
                 <ul className={styles.specsList}>
                   {PRODUCT.specs.map((spec, i) => (
                     <li key={i} className={styles.specItem}>
@@ -90,13 +110,29 @@ function CtgLukComeL8pm() {
                 </ul>
               ) : (
                 <div className={styles.advantages}>
-                  <p><strong>Thiết bị theo dõi sản khoa chuyên sâu cho bệnh viện và phòng khám</strong></p>
+                  <p>
+                    <strong>
+                      Thiết bị theo dõi sản khoa chuyên sâu cho bệnh viện và
+                      phòng khám
+                    </strong>
+                  </p>
                   <ul className={styles.specsList}>
-                    <li className={styles.specItem}>• Màn hình lớn 10.2 inch hiển thị rõ nét từ xa</li>
-                    <li className={styles.specItem}>• Hỗ trợ theo dõi thai đôi và in biểu đồ nhiệt</li>
-                    <li className={styles.specItem}>• Pin Lithium dung lượng cao, hoạt động liên tục khi mất điện</li>
-                    <li className={styles.specItem}>• Kết nối Wi-Fi/Ethernet với hệ thống trung tâm bệnh viện</li>
-                    <li className={styles.specItem}>• Thiết kế nhỏ gọn, dễ di chuyển và sử dụng</li>
+                    <li className={styles.specItem}>
+                      • Màn hình lớn 10.2 inch hiển thị rõ nét từ xa
+                    </li>
+                    <li className={styles.specItem}>
+                      • Hỗ trợ theo dõi thai đôi và in biểu đồ nhiệt
+                    </li>
+                    <li className={styles.specItem}>
+                      • Pin Lithium dung lượng cao, hoạt động liên tục khi mất
+                      điện
+                    </li>
+                    <li className={styles.specItem}>
+                      • Kết nối Wi-Fi/Ethernet với hệ thống trung tâm bệnh viện
+                    </li>
+                    <li className={styles.specItem}>
+                      • Thiết kế nhỏ gọn, dễ di chuyển và sử dụng
+                    </li>
                   </ul>
                 </div>
               )}

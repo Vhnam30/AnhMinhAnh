@@ -223,3 +223,52 @@
     color: white;
   }
 }
+
+// Grid - Đã sửa
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  align-items: stretch;           /* Quan trọng để card cao bằng nhau */
+
+  @media (max-width: 576px) {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+// Card - Chỉ thêm tối thiểu
+.productCard {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;               /* Quan trọng */
+}
+
+.productCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+}
+
+// Phần info - Chỉ thêm margin-top auto cho nút
+.info {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.btnGroup {
+  margin-top: auto;           /* Đẩy 2 nút xuống dưới cùng */
+}
+
+// Highlight từ khóa
+.highlight {
+  font-weight: 700;
+  color: #e63939;        /* Màu đỏ đậm */
+  font-size: 1.02em;
+}
