@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./CtgLukComeL8pm.module.scss";
 
-import { l8pm } from "../../../assets/img/l8pm";
+// Import các hình ảnh riêng lẻ (dễ thêm sau này)
+import { l8pm } from "../../../assets/img/l8pm/index.js";   // ← sửa import theo tên file thật của mày
+
 // Dữ liệu sản phẩm - L8P-M (Luckcome)
 const PRODUCT = {
   id: "ctg-l8p-m",
@@ -25,10 +27,9 @@ const PRODUCT = {
       <span className={styles.highlight}>
         Chức năng điện toán phân tích chỉ số STV (Short-Term Variation - Dao
         động ngắn hạn) là một trong những công cụ lâm sàng tiên tiến và có giá
-        trị nhát trong đo biểu đồ tim thai và cơn gò tử cung (CTG).
+        trị nhất trong đo biểu đồ tim thai và cơn gò tử cung (CTG).
       </span>
     </>,
-
     "Theo dõi nhịp tim thai (FHR): 50~210 bpm (Doppler xung)",
     "Theo dõi cơn co tử cung (TOCO): 0~100 đơn vị",
     "Theo dõi cử động thai (FM): Thủ công & Tự động",
@@ -45,30 +46,78 @@ const PRODUCT = {
   icon: "📟",
 };
 
+// Danh sách hình ảnh slider - Dễ thêm/bớt hình ở đây
+const PRODUCT_IMAGES = [
+  l8pm[0],
+  l8pm[1] || l8pm[0],   // fallback nếu thiếu ảnh
+  l8pm[2] || l8pm[0],
+  
+];
+
 function CtgLukComeL8pm() {
   const [activeTab, setActiveTab] = useState("specs");
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const navigate = useNavigate();
 
   const goToContact = () => {
     navigate("/lien-he");
   };
 
+  // Slider controls
+  const goToPrev = () => {
+    setCurrentImageIndex((prev) => (prev === 0 ? PRODUCT_IMAGES.length - 1 : prev - 1));
+  };
+
+  const goToNext = () => {
+    setCurrentImageIndex((prev) => (prev === PRODUCT_IMAGES.length - 1 ? 0 : prev + 1));
+  };
+
+  const goToSlide = (index) => {
+    setCurrentImageIndex(index);
+  };
+
   return (
     <section className={styles.section} id="product">
       <div className={styles.inner}>
         <div className={styles.grid}>
-          {/* Cột trái: Hình ảnh */}
+          {/* Cột trái: Image Slider */}
           <div className={styles.imageCol}>
-            <div
-              className={styles.imageBox}
-              role="img"
-              aria-label="Máy theo dõi sản khoa L8P-M"
-            >
+            <div className={styles.imageBox}>
               <img
-                src={l8pm[0]}
-                alt={PRODUCT.name}
+                src={PRODUCT_IMAGES[currentImageIndex]}
+                alt={`${PRODUCT.name} - Hình ${currentImageIndex + 1}`}
                 className={styles.productImage}
               />
+
+              {/* Navigation arrows */}
+              <button
+                className={styles.sliderArrow}
+                onClick={goToPrev}
+                aria-label="Previous image"
+              >
+                ←
+              </button>
+              <button
+                className={styles.sliderArrow}
+                onClick={goToNext}
+                aria-label="Next image"
+                style={{ right: "20px", left: "auto" }}
+              >
+                →
+              </button>
+
+              {/* Dots indicator */}
+              <div className={styles.sliderDots}>
+                {PRODUCT_IMAGES.map((_, index) => (
+                  <button
+                    key={index}
+                    className={`${styles.dot} ${index === currentImageIndex ? styles.dotActive : ""}`}
+                    onClick={() => goToSlide(index)}
+                    aria-label={`Go to image ${index + 1}`}
+                  />
+                ))}
+              </div>
+
               <div className={styles.certBadge}>✅ Màn hình lớn 10.2"</div>
             </div>
           </div>
@@ -90,9 +139,7 @@ function CtgLukComeL8pm() {
                   className={`${styles.tab} ${activeTab === tab ? styles.tabActive : ""}`}
                   onClick={() => setActiveTab(tab)}
                 >
-                  {tab === "specs"
-                    ? "📋 Thông số kỹ thuật"
-                    : "🌟 Ưu điểm nổi bật"}
+                  {tab === "specs" ? "📋 Thông số kỹ thuật" : "🌟 Ưu điểm nổi bật"}
                 </button>
               ))}
             </div>
@@ -112,27 +159,15 @@ function CtgLukComeL8pm() {
                 <div className={styles.advantages}>
                   <p>
                     <strong>
-                      Thiết bị theo dõi sản khoa chuyên sâu cho bệnh viện và
-                      phòng khám
+                      Thiết bị theo dõi sản khoa chuyên sâu cho bệnh viện và phòng khám
                     </strong>
                   </p>
                   <ul className={styles.specsList}>
-                    <li className={styles.specItem}>
-                      • Màn hình lớn 10.2 inch hiển thị rõ nét từ xa
-                    </li>
-                    <li className={styles.specItem}>
-                      • Hỗ trợ theo dõi thai đôi và in biểu đồ nhiệt
-                    </li>
-                    <li className={styles.specItem}>
-                      • Pin Lithium dung lượng cao, hoạt động liên tục khi mất
-                      điện
-                    </li>
-                    <li className={styles.specItem}>
-                      • Kết nối Wi-Fi/Ethernet với hệ thống trung tâm bệnh viện
-                    </li>
-                    <li className={styles.specItem}>
-                      • Thiết kế nhỏ gọn, dễ di chuyển và sử dụng
-                    </li>
+                    <li className={styles.specItem}>• Màn hình lớn 10.2 inch hiển thị rõ nét từ xa</li>
+                    <li className={styles.specItem}>• Hỗ trợ theo dõi thai đôi và in biểu đồ nhiệt</li>
+                    <li className={styles.specItem}>• Pin Lithium dung lượng cao, hoạt động liên tục khi mất điện</li>
+                    <li className={styles.specItem}>• Kết nối Wi-Fi/Ethernet với hệ thống trung tâm bệnh viện</li>
+                    <li className={styles.specItem}>• Thiết kế nhỏ gọn, dễ di chuyển và sử dụng</li>
                   </ul>
                 </div>
               )}
@@ -144,12 +179,8 @@ function CtgLukComeL8pm() {
             </div>
 
             <div className={styles.btnRow}>
-              <button className={styles.btnGreen} onClick={goToContact}>
-                🛒 Đặt hàng ngay
-              </button>
-              <button className={styles.btnGold} onClick={goToContact}>
-                📞 Tư vấn miễn phí
-              </button>
+              <button className={styles.btnGreen} onClick={goToContact}>🛒 Đặt hàng ngay</button>
+              <button className={styles.btnGold} onClick={goToContact}>📞 Tư vấn miễn phí</button>
             </div>
           </div>
         </div>

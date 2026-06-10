@@ -249,3 +249,78 @@
   color: #e63939;        /* Màu đỏ đậm */
   font-size: 1.02em;
 }
+
+/* ==================== IMAGE SLIDER ==================== */
+.imageBox {
+  position: relative;
+  overflow: hidden;
+}
+
+.sliderArrow {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transform: translateY(-50%) scale(1.1);
+  }
+}
+
+.sliderArrow:nth-of-type(2) {
+  left: auto;
+  right: 20px;
+}
+
+.sliderDots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.7);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &.dotActive {
+    background: var(--color-green);
+    transform: scale(1.3);
+  }
+}
+
+.productImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  padding: 20px;
+  box-sizing: border-box;
+  transition: opacity 0.4s ease;
+
+  @media (max-width: 600px) {
+    padding: 15px;
+  }
+}

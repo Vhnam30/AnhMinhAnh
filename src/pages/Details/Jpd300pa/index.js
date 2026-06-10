@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Jpd300pa.module.scss";
-import { product } from "../../../assets/img";
+import {jumper300pa} from "../../../assets/img/jumperJpd300pa/index.js"; // Thêm các ảnh khác
 
 // Dữ liệu sản phẩm
 const PRODUCT = {
@@ -24,7 +24,6 @@ const PRODUCT = {
         Tự động bắt cử động thai bằng đầu dò cơn gò tử cung
       </span>{" "}
     </>,
-
     "Tần số đầu dò: 1.0MHz ± 5%, công suất siêu âm < 5mW/cm²",
     "Theo dõi cơn co tử cung (TOCO): 0 - 100 đơn vị (±10%)",
     "Đầu dò không dây - Công nghệ Doppler xung đa tinh thể",
@@ -41,36 +40,72 @@ const PRODUCT = {
   icon: "📟",
 };
 
+// Danh sách hình ảnh slider (bạn có thể thêm nhiều ảnh hơn)
+const PRODUCT_IMAGES = [
+  jumper300pa[0],
+  jumper300pa[1] || jumper300pa[0],   // fallback
+  jumper300pa[2] || jumper300pa[0],
+
+];
+
 function Jpd300pa() {
   const [activeTab, setActiveTab] = useState("specs");
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const navigate = useNavigate();
 
-  // Hàm chuyển hướng sang trang Liên hệ
-  const goToContact = () => {
-    navigate("/lien-he");
+  const goToContact = () => navigate("/lien-he");
+
+  // Slider controls
+  const goToPrev = () => {
+    setCurrentImageIndex((prev) => (prev === 0 ? PRODUCT_IMAGES.length - 1 : prev - 1));
+  };
+
+  const goToNext = () => {
+    setCurrentImageIndex((prev) => (prev === PRODUCT_IMAGES.length - 1 ? 0 : prev + 1));
+  };
+
+  const goToSlide = (index) => {
+    setCurrentImageIndex(index);
   };
 
   return (
     <section className={styles.section} id="product">
       <div className={styles.inner}>
         <div className={styles.grid}>
-          {/* Cột trái: Hình ảnh */}
+          {/* Cột trái: Image Slider */}
           <div className={styles.imageCol}>
-            <div
-              className={styles.imageBox}
-              role="img"
-              aria-label="Máy CTG JUMPER JPD-300Pa"
-            >
+            <div className={styles.imageBox}>
               <img
-                src={product}
-                alt={PRODUCT.name}
+                src={PRODUCT_IMAGES[currentImageIndex]}
+                alt={`${PRODUCT.name} - Hình ${currentImageIndex + 1}`}
                 className={styles.productImage}
               />
+
+              {/* Navigation arrows */}
+              <button className={styles.sliderArrow} onClick={goToPrev} aria-label="Previous image">
+                ←
+              </button>
+              <button className={styles.sliderArrow} onClick={goToNext} aria-label="Next image" style={{ right: '20px', left: 'auto' }}>
+                →
+              </button>
+
+              {/* Dots indicator */}
+              <div className={styles.sliderDots}>
+                {PRODUCT_IMAGES.map((_, index) => (
+                  <button
+                    key={index}
+                    className={`${styles.dot} ${index === currentImageIndex ? styles.dotActive : ''}`}
+                    onClick={() => goToSlide(index)}
+                    aria-label={`Go to image ${index + 1}`}
+                  />
+                ))}
+              </div>
+
               <div className={styles.certBadge}>✅ Không dây</div>
             </div>
           </div>
 
-          {/* Cột phải: Thông tin */}
+          {/* Cột phải: Thông tin (giữ nguyên) */}
           <div className={styles.infoCol}>
             <span className={styles.sectionTag}>{PRODUCT.tag}</span>
             <div className={styles.brand}>{PRODUCT.brand}</div>
@@ -87,9 +122,7 @@ function Jpd300pa() {
                   className={`${styles.tab} ${activeTab === tab ? styles.tabActive : ""}`}
                   onClick={() => setActiveTab(tab)}
                 >
-                  {tab === "specs"
-                    ? "📋 Thông số kỹ thuật"
-                    : "🌟 Ưu điểm nổi bật"}
+                  {tab === "specs" ? "📋 Thông số kỹ thuật" : "🌟 Ưu điểm nổi bật"}
                 </button>
               ))}
             </div>
@@ -108,30 +141,14 @@ function Jpd300pa() {
               ) : (
                 <div className={styles.advantages}>
                   <p>
-                    <strong>
-                      Thiết kế không dây – Giải pháp tối ưu cho phòng khám hiện
-                      đại
-                    </strong>
+                    <strong>Thiết kế không dây – Giải pháp tối ưu cho phòng khám hiện đại</strong>
                   </p>
                   <ul className={styles.specsList}>
-                    <li className={styles.specItem}>
-                      • Loại bỏ hoàn toàn dây cáp vướng víu, tiết kiệm không
-                      gian
-                    </li>
-                    <li className={styles.specItem}>
-                      • Thai phụ có thể thay đổi tư thế, đi lại nhẹ nhàng trong
-                      lúc đo
-                    </li>
-                    <li className={styles.specItem}>
-                      • Độ nhạy cao, bắt chính xác cơn gò tử cung (TOCO)
-                    </li>
-                    <li className={styles.specItem}>
-                      • Tự động ghi nhận cử động thai nhi (Auto Fetal Movement)
-                    </li>
-                    <li className={styles.specItem}>
-                      • Phân phối độc quyền Angelsounds (Tập đoàn JUMPER) tại
-                      Việt Nam
-                    </li>
+                    <li className={styles.specItem}>• Loại bỏ hoàn toàn dây cáp vướng víu, tiết kiệm không gian</li>
+                    <li className={styles.specItem}>• Thai phụ có thể thay đổi tư thế, đi lại nhẹ nhàng</li>
+                    <li className={styles.specItem}>• Độ nhạy cao, bắt chính xác cơn gò tử cung (TOCO)</li>
+                    <li className={styles.specItem}>• Tự động ghi nhận cử động thai nhi</li>
+                    <li className={styles.specItem}>• Phân phối độc quyền Angelsounds tại Việt Nam</li>
                   </ul>
                 </div>
               )}
@@ -143,12 +160,8 @@ function Jpd300pa() {
             </div>
 
             <div className={styles.btnRow}>
-              <button className={styles.btnGreen} onClick={goToContact}>
-                🛒 Đặt hàng ngay
-              </button>
-              <button className={styles.btnGold} onClick={goToContact}>
-                📞 Tư vấn miễn phí
-              </button>
+              <button className={styles.btnGreen} onClick={goToContact}>🛒 Đặt hàng ngay</button>
+              <button className={styles.btnGold} onClick={goToContact}>📞 Tư vấn miễn phí</button>
             </div>
           </div>
         </div>
