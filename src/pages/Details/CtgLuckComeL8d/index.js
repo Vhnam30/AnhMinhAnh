@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./CtgLukComeL8d.module.scss";
-
+import { l8dDetailImg } from "../../../assets/img/l8d/details/index.js";
 // Import hình ảnh
-import { l8d } from "../../../assets/img/l8d/index.js";
+
 
 // Dữ liệu sản phẩm L8D
 const PRODUCT = {
@@ -40,9 +40,13 @@ const PRODUCT = {
 
 // Danh sách hình ảnh slider
 const PRODUCT_IMAGES = [
-  l8d[0],
-  l8d[1] || l8d[0],
-  l8d[2] || l8d[0],
+  l8dDetailImg[0],
+  l8dDetailImg[1] || l8dDetailImg[0],
+  l8dDetailImg[2] || l8dDetailImg[0],
+  l8dDetailImg[3] || l8dDetailImg[0],
+  l8dDetailImg[4] || l8dDetailImg[0],
+
+
 ];
 
 function CtgLukComeL8d() {

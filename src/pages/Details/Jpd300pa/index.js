@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Jpd300pa.module.scss";
 import { jumper300pa } from "../../../assets/img/jumperJpd300pa/index.js";
-
+import { detail300paImg } from "../../../assets/img/jumperJpd300pa/details/index.js";
 const PRODUCT = {
   id: "jumper-jpd-300pa",
   tag: "Sản phẩm nổi bật",
@@ -39,9 +39,15 @@ const PRODUCT = {
 };
 
 const PRODUCT_IMAGES = [
-  jumper300pa[0],
-  jumper300pa[1] || jumper300pa[0],
-  jumper300pa[2] || jumper300pa[0],
+  detail300paImg[0],
+  detail300paImg[1] || detail300paImg[0],
+  detail300paImg[2] || detail300paImg[0],
+  detail300paImg[3] || detail300paImg[0],
+  detail300paImg[4] || detail300paImg[0],
+  detail300paImg[5] || detail300paImg[0],
+  detail300paImg[6] || detail300paImg[0],
+
+
 ];
 
 function Jpd300pa() {
