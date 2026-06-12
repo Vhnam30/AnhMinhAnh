@@ -11,6 +11,7 @@ import Contact from "./components/Contact/index.js"; // Đổi tên để dễ p
 import Jpd300pa from "./pages/Details/Jpd300pa";
 import CtgLukComeL8pm from "./pages/Details/CtgLukComeL8pm";
 import CtgLukComeL8d from "./pages/Details/CtgLuckComeL8d/index.js";
+import ServicesPage from "./pages/ServicesPage/index.js";
 function App() {
   return (
     <div className="App">
@@ -23,6 +24,7 @@ function App() {
         <Route path="/san-pham/jumper-jpd-300pa" element={<Jpd300pa />} />
         <Route path="/san-pham/ctg-lukcome-l8pm" element={<CtgLukComeL8pm />} />
         <Route path="/san-pham/ctg-lukcome-l8d" element={<CtgLukComeL8d />} />
+        <Route path="/dich-vu" element={<ServicesPage />} />
       </Routes>
 
       <Footer />

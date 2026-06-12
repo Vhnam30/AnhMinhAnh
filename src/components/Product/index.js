@@ -69,11 +69,11 @@ function Product({ fullMode = false }) {
           <h2 className={styles.title}>
             {fullMode ? "Tất Cả Sản Phẩm" : "Sản Phẩm Nổi Bật"}
           </h2>
-          {!fullMode && (
+          {/* {!fullMode && (
             <Link to="/san-pham" className={styles.viewAll}>
               Xem tất cả →
             </Link>
-          )}
+          )} */}
         </div>
 
         <div className={styles.productGrid}>

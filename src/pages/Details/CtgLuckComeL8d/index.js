@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./CtgLukComeL8d.module.scss";
 
-// Import từng hình ảnh riêng lẻ (dễ thêm sau)
+// Import hình ảnh
 import { l8d } from "../../../assets/img/l8d/index.js";
 
 // Dữ liệu sản phẩm L8D
@@ -38,6 +38,13 @@ const PRODUCT = {
   price: "Liên hệ để nhận báo giá",
 };
 
+// Danh sách hình ảnh slider
+const PRODUCT_IMAGES = [
+  l8d[0],
+  l8d[1] || l8d[0],
+  l8d[2] || l8d[0],
+];
+
 function CtgLukComeL8d() {
   const [activeTab, setActiveTab] = useState("specs");
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -47,32 +54,23 @@ function CtgLukComeL8d() {
     navigate("/lien-he");
   };
 
-  // Slider controls
-  const goToPrev = () => {
-    setCurrentImageIndex((prev) => (prev === 0 ? PRODUCT_IMAGES.length - 1 : prev - 1));
-  };
+  // Slider tự động chuyển ảnh
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) =>
+        prev === PRODUCT_IMAGES.length - 1 ? 0 : prev + 1
+      );
+    }, 4000); // Chuyển slide mỗi 4 giây
 
-  const goToNext = () => {
-    setCurrentImageIndex((prev) => (prev === PRODUCT_IMAGES.length - 1 ? 0 : prev + 1));
-  };
-
-  const goToSlide = (index) => {
-    setCurrentImageIndex(index);
-  };
-
-  // Danh sách hình ảnh slider - Dễ thêm/bớt ở đây
-  const PRODUCT_IMAGES = [
-    l8d[0],
-    l8d[1] || l8d[0],
-    l8d[2] || l8d[0],
-    
-  ];
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section className={styles.section} id="product">
       <div className={styles.inner}>
         <div className={styles.grid}>
-          {/* Cột trái: Image Slider */}
+          
+          {/* Cột trái: Image Slider Tự Động */}
           <div className={styles.imageCol}>
             <div className={styles.imageBox}>
               <img
@@ -81,30 +79,13 @@ function CtgLukComeL8d() {
                 className={styles.productImage}
               />
 
-              {/* Navigation arrows */}
-              <button
-                className={styles.sliderArrow}
-                onClick={goToPrev}
-                aria-label="Previous image"
-              >
-                ←
-              </button>
-              <button
-                className={styles.sliderArrow}
-                onClick={goToNext}
-                aria-label="Next image"
-                style={{ right: "20px", left: "auto" }}
-              >
-                →
-              </button>
-
               {/* Dots indicator */}
               <div className={styles.sliderDots}>
                 {PRODUCT_IMAGES.map((_, index) => (
                   <button
                     key={index}
                     className={`${styles.dot} ${index === currentImageIndex ? styles.dotActive : ""}`}
-                    onClick={() => goToSlide(index)}
+                    onClick={() => setCurrentImageIndex(index)}
                     aria-label={`Go to image ${index + 1}`}
                   />
                 ))}

@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Jpd300pa.module.scss";
-import {jumper300pa} from "../../../assets/img/jumperJpd300pa/index.js"; // Thêm các ảnh khác
+import { jumper300pa } from "../../../assets/img/jumperJpd300pa/index.js";
 
-// Dữ liệu sản phẩm
 const PRODUCT = {
   id: "jumper-jpd-300pa",
   tag: "Sản phẩm nổi bật",
@@ -37,15 +36,12 @@ const PRODUCT = {
 
   certifications: ["Bộ Y Tế VN", "CE", "ISO 13485"],
   price: "Liên hệ để nhận báo giá",
-  icon: "📟",
 };
 
-// Danh sách hình ảnh slider (bạn có thể thêm nhiều ảnh hơn)
 const PRODUCT_IMAGES = [
   jumper300pa[0],
-  jumper300pa[1] || jumper300pa[0],   // fallback
+  jumper300pa[1] || jumper300pa[0],
   jumper300pa[2] || jumper300pa[0],
-
 ];
 
 function Jpd300pa() {
@@ -55,24 +51,23 @@ function Jpd300pa() {
 
   const goToContact = () => navigate("/lien-he");
 
-  // Slider controls
-  const goToPrev = () => {
-    setCurrentImageIndex((prev) => (prev === 0 ? PRODUCT_IMAGES.length - 1 : prev - 1));
-  };
+  // Tự động chuyển slide
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => 
+        prev === PRODUCT_IMAGES.length - 1 ? 0 : prev + 1
+      );
+    }, 4000); // Chuyển slide mỗi 4 giây
 
-  const goToNext = () => {
-    setCurrentImageIndex((prev) => (prev === PRODUCT_IMAGES.length - 1 ? 0 : prev + 1));
-  };
-
-  const goToSlide = (index) => {
-    setCurrentImageIndex(index);
-  };
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section className={styles.section} id="product">
       <div className={styles.inner}>
         <div className={styles.grid}>
-          {/* Cột trái: Image Slider */}
+          
+          {/* Cột trái: Image Slider Tự Động */}
           <div className={styles.imageCol}>
             <div className={styles.imageBox}>
               <img
@@ -81,21 +76,13 @@ function Jpd300pa() {
                 className={styles.productImage}
               />
 
-              {/* Navigation arrows */}
-              <button className={styles.sliderArrow} onClick={goToPrev} aria-label="Previous image">
-                ←
-              </button>
-              <button className={styles.sliderArrow} onClick={goToNext} aria-label="Next image" style={{ right: '20px', left: 'auto' }}>
-                →
-              </button>
-
               {/* Dots indicator */}
               <div className={styles.sliderDots}>
                 {PRODUCT_IMAGES.map((_, index) => (
                   <button
                     key={index}
                     className={`${styles.dot} ${index === currentImageIndex ? styles.dotActive : ''}`}
-                    onClick={() => goToSlide(index)}
+                    onClick={() => setCurrentImageIndex(index)}
                     aria-label={`Go to image ${index + 1}`}
                   />
                 ))}
@@ -105,7 +92,7 @@ function Jpd300pa() {
             </div>
           </div>
 
-          {/* Cột phải: Thông tin (giữ nguyên) */}
+          {/* Cột phải: Thông tin */}
           <div className={styles.infoCol}>
             <span className={styles.sectionTag}>{PRODUCT.tag}</span>
             <div className={styles.brand}>{PRODUCT.brand}</div>

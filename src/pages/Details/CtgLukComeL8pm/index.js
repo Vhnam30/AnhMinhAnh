@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./CtgLukComeL8pm.module.scss";
 
-// Import các hình ảnh riêng lẻ (dễ thêm sau này)
-import { l8pm } from "../../../assets/img/l8pm/index.js";   // ← sửa import theo tên file thật của mày
+// Import các hình ảnh
+import { l8pm } from "../../../assets/img/l8pm/index.js";
 
-// Dữ liệu sản phẩm - L8P-M (Luckcome)
 const PRODUCT = {
   id: "ctg-l8p-m",
   tag: "Sản phẩm cao cấp",
@@ -43,15 +42,12 @@ const PRODUCT = {
 
   certifications: ["CE", "ISO 13485", "Bộ Y Tế VN"],
   price: "Liên hệ để nhận báo giá",
-  icon: "📟",
 };
 
-// Danh sách hình ảnh slider - Dễ thêm/bớt hình ở đây
 const PRODUCT_IMAGES = [
   l8pm[0],
-  l8pm[1] || l8pm[0],   // fallback nếu thiếu ảnh
+  l8pm[1] || l8pm[0],
   l8pm[2] || l8pm[0],
-  
 ];
 
 function CtgLukComeL8pm() {
@@ -63,24 +59,23 @@ function CtgLukComeL8pm() {
     navigate("/lien-he");
   };
 
-  // Slider controls
-  const goToPrev = () => {
-    setCurrentImageIndex((prev) => (prev === 0 ? PRODUCT_IMAGES.length - 1 : prev - 1));
-  };
+  // Slider tự động chuyển ảnh
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) =>
+        prev === PRODUCT_IMAGES.length - 1 ? 0 : prev + 1
+      );
+    }, 4000); // Chuyển slide mỗi 4 giây
 
-  const goToNext = () => {
-    setCurrentImageIndex((prev) => (prev === PRODUCT_IMAGES.length - 1 ? 0 : prev + 1));
-  };
-
-  const goToSlide = (index) => {
-    setCurrentImageIndex(index);
-  };
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section className={styles.section} id="product">
       <div className={styles.inner}>
         <div className={styles.grid}>
-          {/* Cột trái: Image Slider */}
+          
+          {/* Cột trái: Image Slider Tự Động */}
           <div className={styles.imageCol}>
             <div className={styles.imageBox}>
               <img
@@ -89,30 +84,13 @@ function CtgLukComeL8pm() {
                 className={styles.productImage}
               />
 
-              {/* Navigation arrows */}
-              <button
-                className={styles.sliderArrow}
-                onClick={goToPrev}
-                aria-label="Previous image"
-              >
-                ←
-              </button>
-              <button
-                className={styles.sliderArrow}
-                onClick={goToNext}
-                aria-label="Next image"
-                style={{ right: "20px", left: "auto" }}
-              >
-                →
-              </button>
-
               {/* Dots indicator */}
               <div className={styles.sliderDots}>
                 {PRODUCT_IMAGES.map((_, index) => (
                   <button
                     key={index}
                     className={`${styles.dot} ${index === currentImageIndex ? styles.dotActive : ""}`}
-                    onClick={() => goToSlide(index)}
+                    onClick={() => setCurrentImageIndex(index)}
                     aria-label={`Go to image ${index + 1}`}
                   />
                 ))}
