@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Jpd300pa.module.scss";
-import { jumper300pa } from "../../../assets/img/jumperJpd300pa/index.js";
+
 import { detail300paImg } from "../../../assets/img/jumperJpd300pa/details/index.js";
 const PRODUCT = {
   id: "jumper-jpd-300pa",
