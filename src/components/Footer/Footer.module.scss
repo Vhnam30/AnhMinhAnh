@@ -1,9 +1,8 @@
-
-
 // .footer {
 //   background: var(--color-green-dark);
-//   color: #ddd;
-//   padding-top: 60px;
+//   color: #e0e0e0;
+//   padding-top: 70px;
+//   font-size: 15px;
 // }
 
 // .inner {
@@ -14,41 +13,48 @@
 
 // .grid {
 //   display: grid;
-//   grid-template-columns: 2fr 1fr 1fr 1.5fr;
-//   gap: 40px;
+//   grid-template-columns: 2fr 1fr 1fr 1.4fr;
+//   gap: 48px;
 
-//   @media (max-width: 992px) {
+//   @media (max-width: 1024px) {
 //     grid-template-columns: 1fr 1fr;
+//     gap: 40px;
 //   }
+
 //   @media (max-width: 600px) {
 //     grid-template-columns: 1fr;
 //     gap: 36px;
 //   }
 // }
 
+// // ==================== CỘT CHUNG ====================
 // .colTitle {
 //   color: var(--color-gold);
-//   margin-bottom: 16px;
-//   font-size: 15px;
+//   margin-bottom: 18px;
+//   font-size: 16px;
 //   font-weight: 600;
+//   letter-spacing: 0.3px;
 // }
 
 // .linkList {
 //   list-style: none;
 //   padding: 0;
+//   margin: 0;
 
 //   a {
-//     color: #ddd;
+//     color: #e0e0e0;
 //     text-decoration: none;
-//     line-height: 2;
-//     transition: color 0.2s;
+//     line-height: 2.1;
+//     transition: all 0.25s ease;
 
 //     &:hover {
 //       color: var(--color-gold);
+//       padding-left: 4px;
 //     }
 //   }
 // }
 
+// // ==================== CỘT 1: LOGO & SOCIAL ====================
 // .logoGroup {
 //   display: flex;
 //   align-items: center;
@@ -57,12 +63,13 @@
 // }
 
 // .logo {
-//   height: 65px;
+//   height: 68px;
+//   width: auto;
 // }
 
 // .companyName {
 //   color: #fff;
-//   font-size: 18px;
+//   font-size: 19px;
 //   font-weight: 700;
 //   margin: 0;
 // }
@@ -70,23 +77,103 @@
 // .tagline {
 //   color: var(--color-gold);
 //   font-size: 13px;
-//   margin: 4px 0 0;
+//   margin-top: 2px;
 // }
 
-// .hotline {
-//   color: var(--color-gold);
-//   font-weight: 600;
-//   font-size: 17px;
+// .description {
+//   line-height: 1.7;
+//   margin-bottom: 28px;
+//   max-width: 280px;
 // }
 
-// // Bottom Bar
+// // Social
+// .socialGroup {
+//   margin-top: 10px;
+// }
+
+// .socialTitle {
+//   color: #ccc;
+//   font-size: 14px;
+//   margin-bottom: 12px;
+//   font-weight: 500;
+// }
+
+// .socialIcons {
+//   display: flex;
+//   gap: 14px;
+// }
+
+// .socialIcon {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   width: 48px;
+//   height: 48px;
+//   background: rgba(255, 255, 255, 0.1);
+//   border-radius: 12px;
+//   font-size: 22px;
+//   color: #fff;
+//   transition: all 0.3s ease;
+//   border: 1px solid rgba(255, 255, 255, 0.1);
+
+//   &:hover {
+//     background: var(--color-gold);
+//     color: var(--color-green-dark);
+//     transform: translateY(-4px) scale(1.08);
+//   }
+// }
+
+// // ==================== LIÊN HỆ ====================
+// .contactInfo {
+//   line-height: 1.8;
+
+//   .hotline {
+//     color: var(--color-gold);
+//     font-weight: 700;
+//     font-size: 17px;
+//     text-decoration: none;
+
+//     &:hover {
+//       color: #fff;
+//       text-decoration: underline;
+//     }
+//   }
+// }
+
+// // ==================== BOTTOM BAR ====================
 // .bottomBar {
-//   background: rgba(0, 0, 0, 0.3);
-//   padding: 18px 0;
-//   margin-top: 60px;
-//   font-size: 13px;
-//   text-align: center;
-//   border-top: 1px solid rgba(255,255,255,0.1);
+//   background: rgba(0, 0, 0, 0.35);
+//   padding: 22px 0;
+//   margin-top: 70px;
+//   font-size: 13.5px;
+//   border-top: 1px solid rgba(255, 255, 255, 0.08);
+// }
+
+// .copyright {
+//   margin: 0;
+//   color: #bbb;
+// }
+
+// .legal {
+//   margin: 6px 0 0;
+//   color: #aaa;
+// }
+
+// // Responsive tinh chỉnh
+// @media (max-width: 600px) {
+//   .socialIcons {
+//     gap: 12px;
+//   }
+  
+//   .socialIcon {
+//     width: 44px;
+//     height: 44px;
+//     font-size: 20px;
+//   }
+// }
+
+// .emailContact {
+//   text-decoration: none;
 // }
 
 .footer {
@@ -104,17 +191,26 @@
 
 .grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1.4fr;
-  gap: 48px;
+  // Cấu hình 5 cột trên màn hình máy tính rộng
+  grid-template-columns: 1.8fr 1fr 1fr 1.3fr 1.5fr;
+  gap: 32px;
 
-  @media (max-width: 1024px) {
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
+  @media (max-width: 1200px) {
+    // Thu gọn lại 3 cột ở màn hình trung bình
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 36px;
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
+    // 2 cột ở màn hình máy tính bảng
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  @media (max-width: 576px) {
+    // 1 cột ở màn hình điện thoại
     grid-template-columns: 1fr;
-    gap: 36px;
+    gap: 32px;
   }
 }
 
@@ -214,9 +310,14 @@
   }
 }
 
-// ==================== LIÊN HỆ ====================
+// ==================== CỘT 4: LIÊN HỆ ====================
 .contactInfo {
   line-height: 1.8;
+
+  .address {
+    margin: 0;
+    line-height: 1.6;
+  }
 
   .hotline {
     color: var(--color-gold);
@@ -228,6 +329,30 @@
       color: #fff;
       text-decoration: underline;
     }
+  }
+}
+
+.emailContact {
+  color: #e0e0e0;
+  text-decoration: none;
+
+  &:hover {
+    color: var(--color-gold);
+  }
+}
+
+// ==================== CỘT 5: GOOGLE MAP ====================
+.mapContainer {
+  width: 100%;
+  height: 180px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  iframe {
+    width: 100%;
+    height: 100%;
   }
 }
 
@@ -255,14 +380,10 @@
   .socialIcons {
     gap: 12px;
   }
-  
+
   .socialIcon {
     width: 44px;
     height: 44px;
     font-size: 20px;
   }
-}
-
-.emailContact {
-  text-decoration: none;
 }
